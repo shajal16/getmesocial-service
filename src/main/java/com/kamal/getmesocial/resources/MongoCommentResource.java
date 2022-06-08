@@ -7,6 +7,7 @@ import com.kamal.getmesocial.service.MongoCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public class MongoCommentResource {
     private MongoCommentService mongoCommentService;
 
     @PostMapping("/comment")
-    public MongoComment createComment(@RequestBody MongoComment mongoComment){
+    public MongoComment createComment(@RequestBody @Valid MongoComment mongoComment){
         mongoCommentService.createComment(mongoComment);
         return mongoComment;
     }

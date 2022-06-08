@@ -1,7 +1,10 @@
 package com.kamal.getmesocial.model;
 
+import com.kamal.getmesocial.validation.ValidCreatedBy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.Min;
 
 @Document(collection = "Comment")
 
@@ -9,7 +12,9 @@ public class MongoComment {
     @Id
     private String id;
     private String photoId;
+    @Min(value = 5)
     private String message;
+    @ValidCreatedBy
     private String createdBy;
     private String dateCreated;
 

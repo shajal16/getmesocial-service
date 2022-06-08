@@ -7,7 +7,7 @@ public class Album {
     private String coverPicUrl;
 
     public Album() {
-        super();
+        //super();
     }
 
     public Album(int albumId, String name, String description, String coverPicUrl) {

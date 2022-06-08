@@ -1,12 +1,13 @@
 package com.kamal.getmesocial.resources;
 
+import com.kamal.getmesocial.exception.RestrictedInfoException;
 import com.kamal.getmesocial.model.MongoUser;
 import com.kamal.getmesocial.service.MongoUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -17,7 +18,7 @@ public class MongoUserResource {
 
 
     @PostMapping("/user")
-    public MongoUser createUser(@RequestBody MongoUser mongoUser){
+    public MongoUser createUser(@RequestBody @Valid MongoUser mongoUser) {
         mongoUserService.createUser(mongoUser);
         return mongoUser;
     }
@@ -26,11 +27,21 @@ public class MongoUserResource {
         return mongoUserService.getAllUsers();
 
     }
+    @GetMapping("/user/name")
+    public List<MongoUser> getByName(@RequestParam (name = "name") String name) throws RestrictedInfoException {
+        if(name.equalsIgnoreCase("root")){
+            throw new RestrictedInfoException();
+        }
+        return mongoUserService.getByName(name);
+
+    }
+
     @GetMapping("/user")
-    public Optional<MongoUser> getById(@RequestParam (name = "id") String userId) {
+    public MongoUser getById(@RequestParam (name = "id") String userId) {
         return mongoUserService.getById(userId);
 
     }
+
     @PutMapping("/user")
     public MongoUser updateMongoUser(@RequestBody MongoUser mongoUser) {
         return mongoUserService.updateMongoUser(mongoUser);

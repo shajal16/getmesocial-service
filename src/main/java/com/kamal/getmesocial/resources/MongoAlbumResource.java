@@ -10,6 +10,7 @@ import com.kamal.getmesocial.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class MongoAlbumResource {
     private MongoAlbumService mongoAlbumService;
 
     @PostMapping("/album")
-    public MongoAlbum createAlbum(@RequestBody MongoAlbum mongoAlbum){
+    public MongoAlbum createAlbum(@RequestBody @Valid MongoAlbum mongoAlbum){
         mongoAlbumService.createAlbum(mongoAlbum);
         return mongoAlbum;
     }
