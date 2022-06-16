@@ -1,5 +1,7 @@
 package com.kamal.getmesocial.exception;
 
+import com.google.firebase.ErrorCode;
+import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,6 +17,11 @@ public class GlobalException {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.I_AM_A_TEAPOT);
     }
 
+    @ExceptionHandler(IdTokenException.class)
+    public ResponseEntity<String> IdTokenError(IdTokenException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.I_AM_A_TEAPOT);
+    }
+
 
     @ExceptionHandler(NoSuchElementException.class)
     public String noSuchElementEx(){
@@ -25,4 +32,6 @@ public class GlobalException {
     public String methodArgumentNotValid(){
         return "Please Provide Proper Data";
     }
+
+
 }

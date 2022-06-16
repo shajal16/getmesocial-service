@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Document(collection = "Comment")
 
@@ -12,14 +13,14 @@ public class MongoComment {
     @Id
     private String id;
     private String photoId;
-    @Min(value = 5)
+    @Size(min = 5, message = "Minimum size 5")
     private String message;
     @ValidCreatedBy
     private String createdBy;
     private String dateCreated;
 
     public MongoComment() {
-        super();
+
     }
 
     public MongoComment(String photoId, String message, String createdBy, String dateCreated) {

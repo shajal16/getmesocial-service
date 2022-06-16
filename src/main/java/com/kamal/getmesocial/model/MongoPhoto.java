@@ -17,7 +17,7 @@ public class MongoPhoto {
     private String dateCreated;
 
     public MongoPhoto() {
-        super();
+
     }
 
     public MongoPhoto(String albumId, String photoUrl, String createdBy, String dateCreated) {

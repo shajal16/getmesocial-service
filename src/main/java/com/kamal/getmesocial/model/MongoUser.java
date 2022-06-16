@@ -22,7 +22,7 @@ public class MongoUser {
     private String profilePhotoUrl;
 
     public MongoUser() {
-        super();
+
     }
 
     public MongoUser(String name, String email, String profilePhotoUrl) {

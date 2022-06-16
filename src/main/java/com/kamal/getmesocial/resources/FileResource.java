@@ -1,6 +1,7 @@
 package com.kamal.getmesocial.resources;
 
 import com.amazonaws.services.s3.Headers;
+import com.amazonaws.services.s3.model.MultipartUpload;
 import com.amazonaws.services.s3.model.S3Object;
 import com.kamal.getmesocial.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 
 @RestController
@@ -21,7 +23,7 @@ public class FileResource {
     private FileService fileService;
 
     @PostMapping
-    public boolean upload(@RequestParam(name = "file") MultipartFile file){
+    public boolean upload(@RequestPart(name = "file") MultipartFile file){
         return fileService.upload(file);
     }
 
@@ -33,7 +35,7 @@ public class FileResource {
     }
 
     @GetMapping("/download")
-    public ResponseEntity<ByteArrayResource> download (@RequestParam(name = "key") String key) throws IOException {
+    public ResponseEntity<ByteArrayResource> download(@RequestParam(name = "key") String key) throws IOException {
         S3Object obj = fileService.getFile(key);
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(obj.getObjectMetadata().getContentType()))
