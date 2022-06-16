@@ -19,7 +19,8 @@ public class MongoCommentService {
 
 
 
-    public MongoComment createComment(MongoComment mongoComment) {
+    public MongoComment createComment(MongoComment mongoComment, String name) {
+        mongoComment.setCreatedBy(name);
         return mongoCommentRepository.save(mongoComment);
     }
 
@@ -31,8 +32,14 @@ public class MongoCommentService {
         return mongoCommentRepository.save(mongoComment);
     }
 
-    public void deleteComment(String commentId) {
-        mongoCommentRepository.deleteById(commentId);
+    public void deleteComment(String commentId, String user) throws Exception {
+        Optional<MongoComment> ph =  mongoCommentRepository.findById(user);
+        if(ph.get().getCreatedBy().equals(user)){
+            mongoCommentRepository.deleteById(commentId);
+        }else{
+            throw new Exception("WRONG USER");
+        }
+
     }
 
     public Optional<MongoComment> getById(String id) {

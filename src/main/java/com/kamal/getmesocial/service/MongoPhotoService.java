@@ -15,7 +15,8 @@ public class MongoPhotoService {
 
 
 
-    public MongoPhoto createPhoto(MongoPhoto mongoPhoto) {
+    public MongoPhoto createPhoto(MongoPhoto mongoPhoto, String name) {
+        mongoPhoto.setCreatedBy(name);
         return mongoPhotoRepository.save(mongoPhoto);
     }
 
@@ -27,8 +28,14 @@ public class MongoPhotoService {
         return mongoPhotoRepository.save(mongoPhoto);
     }
 
-    public void deletePhoto(String photoId) {
-        mongoPhotoRepository.deleteById(photoId);
+    public void deletePhoto(String id, String user) throws Exception {
+        Optional<MongoPhoto> ph =  mongoPhotoRepository.findById(id);
+        if(ph.get().getCreatedBy().equals(user)){
+            mongoPhotoRepository.deleteById(id);
+        }else{
+            throw new Exception("WRONG USER");
+        }
+
     }
 
     public Optional<MongoPhoto> getById(String id) {

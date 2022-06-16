@@ -1,5 +1,6 @@
 package com.kamal.getmesocial.model;
 
+import com.kamal.getmesocial.validation.ValidCreatedBy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,11 +12,12 @@ public class MongoPhoto {
     private String id;
     private String albumId;
     private String photoUrl;
+    @ValidCreatedBy
     private String createdBy;
     private String dateCreated;
 
     public MongoPhoto() {
-        super();
+
     }
 
     public MongoPhoto(String albumId, String photoUrl, String createdBy, String dateCreated) {

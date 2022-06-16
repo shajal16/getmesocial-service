@@ -38,23 +38,5 @@ public class MongoAlbumService {
         return mongoAlbumRepository.findById(id);
     }
 
-/*    public Album getAlbum() {
-        return albumRepository.getAlbum();
-    }
 
-    public List<Album> getAllAlbum() {
-        return albumRepository.getAllAlbum();
-    }
-
-    public Album getSingleAlbum(int albumId) {
-        return albumRepository.getSingleAlbum(albumId);
-    }
-
-    public Album updateAlbum(int albumId, Album album) {
-        return albumRepository.updateAlbum(albumId, album);
-    }
-
-    public Album deleteAlbum(int albumId) {
-        return albumRepository.deleteAlbum(albumId);
-    }*/
 }
